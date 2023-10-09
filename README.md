@@ -2,8 +2,12 @@
 
 Members:
 
-Gonçalo Daniel Machado Costa - a100824
+Gonçalo Daniel Machado Costa - a100824 
+
 Marta Raquel da Silva Rodrigues - a100743
+
 Diogo Gomes Matos - a100741
+
 José Afonso Lopes Correia - a100610
+
 Flávio Alexandre Marques da Silva - a97352
