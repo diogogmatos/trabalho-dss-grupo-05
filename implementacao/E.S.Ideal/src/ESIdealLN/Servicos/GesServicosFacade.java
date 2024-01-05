@@ -10,7 +10,6 @@ public class GesServicosFacade implements IGesServicos {
 
 	private ServicoAgendadoDAO servicosAgendados;
 	private ServicoDAO servicosDisponiveis;
-	private int nrTotalMarcacoes;
 
 	/**
 	 * 

@@ -9,7 +9,6 @@ public class GesEstacaoFacade implements IGesEstacao {
 	private PostoTrabalhoDAO postosTrabalho;
 	private LocalTime abertura;
 	private LocalTime fecho;
-	private int nrTotalPostos;
 
 	/**
 	 * 

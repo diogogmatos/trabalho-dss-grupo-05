@@ -9,8 +9,6 @@ import java.util.List;
 public class GesFuncionariosFacade implements IGesFuncionarios {
 
 	private FuncionarioDAO funcionarios;
-	private int nrTotalFuncionarios;
-	private int nrTotalTurnos;
 
 	/**
 	 * 
