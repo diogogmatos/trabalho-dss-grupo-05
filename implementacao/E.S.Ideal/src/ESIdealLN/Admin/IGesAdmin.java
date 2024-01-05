@@ -4,7 +4,7 @@ import ESIdealLN.Estacao.PostoTrabalho;
 import ESIdealLN.Funcionarios.Funcionario;
 import ESIdealLN.Servicos.Servico;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface IGesAdmin {
@@ -20,7 +20,7 @@ public interface IGesAdmin {
 	 * @param palavraPasse
 	 * @param novaPalavraPasse
 	 */
-	void alterarPalavraPasse(String palavraPasse, String novaPalavraPasse);
+	void alterarPalavraPasse(String palavraPasse, String novaPalavraPasse) throws Exception;
 
 	/**
 	 * 
@@ -30,6 +30,6 @@ public interface IGesAdmin {
 	 * @param servicosDisponiveis
 	 * @param funcionarios
 	 */
-	void configurarSistema(LocalDateTime abertura, LocalDateTime fecho, List<PostoTrabalho> postosTrabalho, List<Servico> servicosDisponiveis, List<Funcionario> funcionarios);
+	void configurarSistema(LocalTime abertura, LocalTime fecho, List<PostoTrabalho> postosTrabalho, List<Servico> servicosDisponiveis, List<Funcionario> funcionarios);
 
 }

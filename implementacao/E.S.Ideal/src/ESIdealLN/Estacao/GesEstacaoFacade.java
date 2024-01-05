@@ -2,13 +2,13 @@ package ESIdealLN.Estacao;
 
 import ESIdealDL.PostoTrabalhoDAO;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class GesEstacaoFacade implements IGesEstacao {
 
 	private PostoTrabalhoDAO postosTrabalho;
-	private LocalDateTime abertura;
-	private LocalDateTime fecho;
+	private LocalTime abertura;
+	private LocalTime fecho;
 	private int nrTotalPostos;
 
 	/**
@@ -30,13 +30,23 @@ public class GesEstacaoFacade implements IGesEstacao {
 		throw new UnsupportedOperationException();
 	}
 
-	public LocalDateTime getAbertura() {
+	public LocalTime getAbertura() {
 		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.getAbertura
 		throw new UnsupportedOperationException();
 	}
 
-	public LocalDateTime getFecho() {
+	public LocalTime getFecho() {
 		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.getFecho
+		throw new UnsupportedOperationException();
+	}
+
+	public void definirAbertura(LocalTime abertura) {
+		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.definirAbertura
+		throw new UnsupportedOperationException();
+	}
+
+	public void definirFecho(LocalTime fecho) {
+		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.definirFecho
 		throw new UnsupportedOperationException();
 	}
 
