@@ -26,8 +26,7 @@ public class GesAdminFacade implements IGesAdmin {
     }
 
 	/**
-	 * 
-	 * @param palavraPasse
+	 *
 	 * @param novaPalavraPasse
 	 */
 	public void alterarPalavraPasse(String novaPalavraPasse) {

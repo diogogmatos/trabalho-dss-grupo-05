@@ -16,8 +16,7 @@ public interface IGesAdmin {
 	boolean autenticarAdmin(String palavraPasse);
 
 	/**
-	 * 
-	 * @param palavraPasse
+	 *
 	 * @param novaPalavraPasse
 	 */
 	void alterarPalavraPasse(String novaPalavraPasse);
