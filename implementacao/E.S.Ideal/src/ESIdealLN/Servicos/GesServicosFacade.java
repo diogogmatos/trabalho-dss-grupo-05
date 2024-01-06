@@ -3,7 +3,7 @@ package ESIdealLN.Servicos;
 import ESIdealDL.ServicoDAO;
 import ESIdealDL.ServicoAgendadoDAO;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class GesServicosFacade implements IGesServicos {
@@ -13,10 +13,9 @@ public class GesServicosFacade implements IGesServicos {
 
 	/**
 	 * 
-	 * @param servico
-	 * @param matricula
+	 * @param tipoServico
 	 */
-	private boolean validarCompatibilidadeServico(Servico servico, String matricula) {
+	public List<Servico> obterServicosDeTipo(String tipoServico) {
 		// TODO - implement ESIdealLN.Servicos.GesServicosFacade.validarCompatibilidadeServico
 		throw new UnsupportedOperationException();
 	}
@@ -96,11 +95,20 @@ public class GesServicosFacade implements IGesServicos {
 	}
 
 	/**
+	 *
+	 * @param idServico
+	 */
+	public Servico getServicoDisponivel(int idServico) {
+		// TODO - implement ESIdealLN.Servicos.GesServicosFacade.getServicoDisponivel
+		throw new UnsupportedOperationException();
+	}
+
+	/**
 	 * 
 	 * @param matricula
 	 * @param designacaoServicos
 	 */
-	public List<Integer> agendarServicos(String matricula, List<String> designacaoServicos) {
+	public List<Integer> agendarServicos(String matricula, List<String> designacaoServicos) throws Exception {
 		// TODO - implement ESIdealLN.Servicos.GesServicosFacade.agendarServicos
 		throw new UnsupportedOperationException();
 	}
@@ -133,12 +141,21 @@ public class GesServicosFacade implements IGesServicos {
 	}
 
 	/**
-	 * 
-	 * @param servicos
+	 *
+	 * @param nrMarcacao
+	 * @param motivo
 	 */
-	public LocalDateTime calcularHoraConclusao(List<Integer> servicos) {
-		// TODO - implement ESIdealLN.Servicos.GesServicosFacade.calcularHoraConclusao
+	public void marcarComoIncompleto(int nrMarcacao, String motivo) {
+		// TODO - implement ESIdealLN.Servicos.GesServicosFacade.marcarComoIncompleto
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * 
+	 * @param servicos
+	 */
+	public LocalTime calcularHoraConclusao(List<Integer> servicos) {
+		// TODO - implement ESIdealLN.Servicos.GesServicosFacade.calcularHoraConclusao
+		throw new UnsupportedOperationException();
+	}
 }

@@ -1,9 +1,15 @@
 package ESIdealLN.Servicos;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface IGesServicos {
+    /**
+     *
+     * @param tipoServico
+     */
+    public List<Servico> obterServicosDeTipo(String tipoServico);
+
     /**
      *
      * @param nrCartao
@@ -31,10 +37,16 @@ public interface IGesServicos {
 
     /**
      *
+     * @param idServico
+     */
+    public Servico getServicoDisponivel(int idServico);
+
+    /**
+     *
      * @param matricula
      * @param designacaoServicos
      */
-    public List<Integer> agendarServicos(String matricula, List<String> designacaoServicos);
+    public List<Integer> agendarServicos(String matricula, List<String> designacaoServicos) throws Exception;
 
     /**
      *
@@ -56,7 +68,14 @@ public interface IGesServicos {
 
     /**
      *
+     * @param nrMarcacao
+     * @param motivo
+     */
+    public void marcarComoIncompleto(int nrMarcacao, String motivo);
+
+    /**
+     *
      * @param servicos
      */
-    public LocalDateTime calcularHoraConclusao(List<Integer> servicos);
+    public LocalTime calcularHoraConclusao(List<Integer> servicos);
 }

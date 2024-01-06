@@ -1,10 +1,11 @@
 package ESIdealLN.Estacao;
 
 public class PostoHibrido extends PostoTrabalho {
-
-	public String getTipo() {
-		// TODO - implement ESIdealLN.Estacao.PostoHibrido.getTipo
-		throw new UnsupportedOperationException();
+	public PostoHibrido(int nrPosto) {
+		super(nrPosto);
 	}
 
+	public String getTipo() {
+		return "hibrido";
+	}
 }

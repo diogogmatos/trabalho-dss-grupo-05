@@ -9,22 +9,11 @@ public class RegistoTurno {
 	private LocalDateTime fim;
 	private int funcionario;
 
-	/**
-	 * 
-	 * @param nrMarcacao
-	 */
-	public void iniciarServico(int nrMarcacao) {
-		// TODO - implement ESIdealLN.Funcionarios.RegistoTurno.iniciarServico
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param nrMarcacao
-	 */
-	public void terminarServico(int nrMarcacao) {
-		// TODO - implement ESIdealLN.Funcionarios.RegistoTurno.terminarServico
-		throw new UnsupportedOperationException();
+	public RegistoTurno(int nrTurno, LocalDateTime inicio, LocalDateTime fim, int funcionario) {
+		this.nrTurno = nrTurno;
+		this.inicio = inicio;
+		this.fim = fim;
+		this.funcionario = funcionario;
 	}
 
 	public int getNrTurno() {
@@ -35,4 +24,11 @@ public class RegistoTurno {
 		return this.funcionario;
 	}
 
+	public LocalDateTime getInicio() {
+		return this.inicio;
+	}
+
+	public LocalDateTime getFim() {
+		return this.fim;
+	}
 }

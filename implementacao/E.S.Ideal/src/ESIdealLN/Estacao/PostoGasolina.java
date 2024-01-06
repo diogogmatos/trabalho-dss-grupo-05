@@ -1,10 +1,11 @@
 package ESIdealLN.Estacao;
 
 public class PostoGasolina extends PostoTrabalho {
-
-	public String getTipo() {
-		// TODO - implement ESIdealLN.Estacao.PostoGasolina.getTipo
-		throw new UnsupportedOperationException();
+	public PostoGasolina(int nrPosto) {
+		super(nrPosto);
 	}
 
+	public String getTipo() {
+		return "gasolina";
+	}
 }

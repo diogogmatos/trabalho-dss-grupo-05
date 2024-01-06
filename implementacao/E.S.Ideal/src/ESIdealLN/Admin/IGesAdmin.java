@@ -20,7 +20,7 @@ public interface IGesAdmin {
 	 * @param palavraPasse
 	 * @param novaPalavraPasse
 	 */
-	void alterarPalavraPasse(String palavraPasse, String novaPalavraPasse) throws Exception;
+	void alterarPalavraPasse(String novaPalavraPasse);
 
 	/**
 	 * 

@@ -1,12 +1,12 @@
 package ESIdealLN.Veiculos;
 
-public class VeiculoGasolina extends Veiculo {
-	public VeiculoGasolina(String matricula, String nifCliente) {
+public class VeiculoHibridoGasolina extends Veiculo {
+	public VeiculoHibridoGasolina(String matricula, String nifCliente) {
 		super(matricula, nifCliente);
 	}
 
 	public String getTipoMotor() {
-		return "gasolina";
+		return "hibridogla";
 	}
 
 	/**
@@ -15,7 +15,7 @@ public class VeiculoGasolina extends Veiculo {
 	 */
 	public boolean validarCompatibilidade(String tipoServico) {
 		return switch (tipoServico) {
-			case "universal", "combustao", "gasolina" -> true;
+			case "universal", "combustao", "gasolina", "eletrico", "hibrido" -> true;
 			default -> false;
 		};
 	}

@@ -6,6 +6,10 @@ public class GesClientesFacade implements IGesClientes {
 
 	private ClienteDAO clientes;
 
+	public GesClientesFacade() {
+		this.clientes = new ClienteDAO();
+	}
+
 	/**
 	 * 
 	 * @param nome

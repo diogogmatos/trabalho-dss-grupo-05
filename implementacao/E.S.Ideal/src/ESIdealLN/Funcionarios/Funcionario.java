@@ -7,6 +7,11 @@ public class Funcionario {
 	private int nrCartao;
 	private List<String> competencias;
 
+	public Funcionario(int nrCartao, List<String> competencias) {
+		this.nrCartao = nrCartao;
+		this.competencias = competencias;
+	}
+
 	public int getNrCartao() {
 		return this.nrCartao;
 	}

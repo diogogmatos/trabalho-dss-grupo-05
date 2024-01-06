@@ -10,6 +10,12 @@ public class GesEstacaoFacade implements IGesEstacao {
 	private LocalTime abertura;
 	private LocalTime fecho;
 
+	public GesEstacaoFacade() {
+		this.postosTrabalho = new PostoTrabalhoDAO();
+		this.abertura = LocalTime.of(8, 0);
+		this.fecho = LocalTime.of(20, 0);
+	}
+
 	/**
 	 * 
 	 * @param nrPosto
@@ -26,6 +32,15 @@ public class GesEstacaoFacade implements IGesEstacao {
 	 */
 	public void adicionarPostoTrabalho(String tipoPosto) {
 		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.adicionarPostoTrabalho
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 *
+	 * @param nrPosto
+	 */
+	public boolean validaPostoTrabalho(int nrPosto) {
+		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.validaPostoTrabalho
 		throw new UnsupportedOperationException();
 	}
 

@@ -15,6 +15,8 @@ public interface IGesEstacao {
      */
     public void adicionarPostoTrabalho(String tipoPosto);
 
+    public boolean validaPostoTrabalho(int nrPosto);
+
     public LocalTime getAbertura();
 
     public LocalTime getFecho();

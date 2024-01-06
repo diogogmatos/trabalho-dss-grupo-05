@@ -8,6 +8,8 @@ import java.util.List;
 
 public class GesFuncionariosFacade implements IGesFuncionarios {
 
+	private RegistoTurnoDAO turnos;
+	private RegistoServicoDAO servicosEfetuados;
 	private FuncionarioDAO funcionarios;
 
 	/**
@@ -60,7 +62,7 @@ public class GesFuncionariosFacade implements IGesFuncionarios {
 	 * 
 	 * @param nrCartao
 	 */
-	public void iniciarTurno(int nrCartao) {
+	public int iniciarTurno(int nrCartao) {
 		// TODO - implement ESIdealLN.Funcionarios.GesFuncionariosFacade.iniciarTurno
 		throw new UnsupportedOperationException();
 	}
@@ -80,7 +82,7 @@ public class GesFuncionariosFacade implements IGesFuncionarios {
 	 * @param nrCartao
 	 * @param nrMarcacao
 	 */
-	public void iniciarServico(int nrCartao, int nrMarcacao) {
+	public int iniciarServico(int nrCartao, int nrMarcacao) {
 		// TODO - implement ESIdealLN.Funcionarios.GesFuncionariosFacade.iniciarServico
 		throw new UnsupportedOperationException();
 	}
@@ -92,16 +94,6 @@ public class GesFuncionariosFacade implements IGesFuncionarios {
 	 */
 	public void terminarServico(int nrCartao, int nrMarcacao) {
 		// TODO - implement ESIdealLN.Funcionarios.GesFuncionariosFacade.terminarServico
-		throw new UnsupportedOperationException();
-	}
-
-	public RegistoTurnoDAO getTurnos() {
-		// TODO - implement ESIdealLN.Funcionarios.GesFuncionariosFacade.getTurnos
-		throw new UnsupportedOperationException();
-	}
-
-	public RegistoServicoDAO getServicosEfetuados() {
-		// TODO - implement ESIdealLN.Funcionarios.GesFuncionariosFacade.getServicosEfetuados
 		throw new UnsupportedOperationException();
 	}
 

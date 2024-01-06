@@ -1,10 +1,12 @@
 package ESIdealLN.Veiculos;
 
 public class VeiculoEletrico extends Veiculo {
+	public VeiculoEletrico(String matricula, String nifCliente) {
+		super(matricula, nifCliente);
+	}
 
 	public String getTipoMotor() {
-		// TODO - implement ESIdealLN.Veiculos.VeiculoEletrico.getTipoMotor
-		throw new UnsupportedOperationException();
+		return "eletrico";
 	}
 
 	/**
@@ -12,8 +14,9 @@ public class VeiculoEletrico extends Veiculo {
 	 * @param tipoServico
 	 */
 	public boolean validarCompatibilidade(String tipoServico) {
-		// TODO - implement ESIdealLN.Veiculos.VeiculoEletrico.validarCompatibilidade
-		throw new UnsupportedOperationException();
+		return switch (tipoServico) {
+			case "universal", "eletrico" -> true;
+            default -> false;
+		};
 	}
-
 }

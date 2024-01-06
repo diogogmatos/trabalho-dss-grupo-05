@@ -2,18 +2,31 @@ package ESIdealUI;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Menu {
     private Map<Integer, String> optionNames;
     private Map<Integer, Runnable> optionHandlers;
     private String title;
+    private boolean exitOption;
 
     public Menu(String title) {
         this.title = title;
         this.optionNames = new HashMap<>();
         this.optionHandlers = new HashMap<>();
+        this.exitOption = true;
         addExitOption();
+    }
+
+    public Menu(String title, boolean exitOption) {
+        this.title = title;
+        this.optionNames = new HashMap<>();
+        this.optionHandlers = new HashMap<>();
+        this.exitOption = exitOption;
+        if (exitOption) {
+            addExitOption();
+        }
     }
 
     private void addExitOption() {
@@ -34,11 +47,11 @@ public class Menu {
     }
 
     public void display() {
-        System.out.println("=== " + title + " ===");
+        System.out.println("\n=== " + title + " ===");
         for (Map.Entry<Integer, String> entry : optionNames.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue());
         }
-        System.out.println("====================");
+        System.out.println("=====================");
 
         int choice = getUserChoice();
 
@@ -51,11 +64,11 @@ public class Menu {
         int choice = -1;
 
         do {
-            System.out.print("Enter your choice (0-" + (optionNames.size() - 1) + "): ");
+            System.out.print("Digite a sua escolha (0-" + (optionNames.size() - 1) + "): ");
             try {
                 choice = scanner.nextInt();
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Input inválido. Por favor digite um número inteiro.");
                 scanner.nextLine(); // Clear the buffer
             }
 

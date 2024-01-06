@@ -2,6 +2,8 @@ package ESIdealLN.Veiculos;
 
 import ESIdealDL.VeiculoDAO;
 
+import java.util.List;
+
 public class GesVeiculosFacade implements IGesVeiculos {
 
 	private VeiculoDAO veiculos;
@@ -55,4 +57,12 @@ public class GesVeiculosFacade implements IGesVeiculos {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 *
+	 * @param matricula
+	 */
+	public List<String> obterTipoServicosCompativeis(String matricula) {
+		// TODO - implement ESIdealLN.Veiculos.GesVeiculosFacade.obterServicosCompativeis
+		throw new UnsupportedOperationException();
+	}
 }

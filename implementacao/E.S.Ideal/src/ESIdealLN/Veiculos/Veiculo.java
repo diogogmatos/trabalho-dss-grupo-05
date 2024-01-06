@@ -5,6 +5,11 @@ public abstract class Veiculo {
 	private String matricula;
 	private String nifCliente;
 
+	public Veiculo(String matricula, String nifCliente) {
+		this.matricula = matricula;
+		this.nifCliente = nifCliente;
+	}
+
 	public String getMatricula() {
 		return this.matricula;
 	}

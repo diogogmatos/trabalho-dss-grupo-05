@@ -1,10 +1,12 @@
 package ESIdealLN.Veiculos;
 
 public class VeiculoGasoleo extends Veiculo {
+	public VeiculoGasoleo(String matricula, String nifCliente) {
+		super(matricula, nifCliente);
+	}
 
 	public String getTipoMotor() {
-		// TODO - implement ESIdealLN.Veiculos.VeiculoGasoleo.getTipoMotor
-		throw new UnsupportedOperationException();
+		return "gasoleo";
 	}
 
 	/**
@@ -12,8 +14,9 @@ public class VeiculoGasoleo extends Veiculo {
 	 * @param tipoServico
 	 */
 	public boolean validarCompatibilidade(String tipoServico) {
-		// TODO - implement ESIdealLN.Veiculos.VeiculoGasoleo.validarCompatibilidade
-		throw new UnsupportedOperationException();
+		return switch (tipoServico) {
+			case "universal", "combustao", "gasoleo" -> true;
+			default -> false;
+		};
 	}
-
 }

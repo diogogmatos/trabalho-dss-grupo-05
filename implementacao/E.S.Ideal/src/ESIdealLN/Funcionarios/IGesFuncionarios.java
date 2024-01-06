@@ -41,7 +41,7 @@ public interface IGesFuncionarios {
      *
      * @param nrCartao
      */
-    public void iniciarTurno(int nrCartao);
+    public int iniciarTurno(int nrCartao);
 
     /**
      *
@@ -55,7 +55,7 @@ public interface IGesFuncionarios {
      * @param nrCartao
      * @param nrMarcacao
      */
-    public void iniciarServico(int nrCartao, int nrMarcacao);
+    public int iniciarServico(int nrCartao, int nrMarcacao);
 
     /**
      *
@@ -63,8 +63,4 @@ public interface IGesFuncionarios {
      * @param nrMarcacao
      */
     public void terminarServico(int nrCartao, int nrMarcacao);
-
-    public RegistoTurnoDAO getTurnos();
-
-    public RegistoServicoDAO getServicosEfetuados();
 }

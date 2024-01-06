@@ -11,6 +11,10 @@ public class GesAdminFacade implements IGesAdmin {
 
 	private String palavraPasseMestra;
 
+	public GesAdminFacade(String palavraPasseMestra) {
+		this.palavraPasseMestra = palavraPasseMestra;
+	}
+
 	/**
 	 *
 	 * @param palavraPasse
@@ -26,11 +30,8 @@ public class GesAdminFacade implements IGesAdmin {
 	 * @param palavraPasse
 	 * @param novaPalavraPasse
 	 */
-	public void alterarPalavraPasse(String palavraPasse, String novaPalavraPasse) throws Exception {
-		if (autenticarAdmin(palavraPasse))
-			palavraPasseMestra = novaPalavraPasse;
-
-		throw new Exception("Palavra-passe mestra incorreta.");
+	public void alterarPalavraPasse(String novaPalavraPasse) {
+		palavraPasseMestra = novaPalavraPasse;
 	}
 
 	/**

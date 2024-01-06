@@ -10,6 +10,16 @@ public class Cliente {
 	private boolean notSMS;
 	private boolean notEmail;
 
+	public Cliente(String nome, String nif, String morada, String telefone, String email, boolean notSMS, boolean notEmail) {
+		this.nome = nome;
+		this.nif = nif;
+		this.morada = morada;
+		this.telefone = telefone;
+		this.email = email;
+		this.notSMS = notSMS;
+		this.notEmail = notEmail;
+	}
+
 	public String getNome() {
 		return this.nome;
 	}

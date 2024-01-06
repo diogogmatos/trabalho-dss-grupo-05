@@ -1,5 +1,7 @@
 package ESIdealLN.Veiculos;
 
+import java.util.List;
+
 public interface IGesVeiculos {
     /**
      *
@@ -34,4 +36,10 @@ public interface IGesVeiculos {
      * @param tipoServico
      */
     public boolean validarCompatibilidadeVeiculo(String matricula, String tipoServico);
+
+    /**
+     *
+     * @param matricula
+     */
+    public List<String> obterTipoServicosCompativeis(String matricula);
 }
