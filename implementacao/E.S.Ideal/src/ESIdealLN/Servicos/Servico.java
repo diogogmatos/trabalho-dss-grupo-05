@@ -1,7 +1,6 @@
 package ESIdealLN.Servicos;
 
 public abstract class Servico {
-
 	private int id;
 	private String designacao;
 	private int tempoNecessario;

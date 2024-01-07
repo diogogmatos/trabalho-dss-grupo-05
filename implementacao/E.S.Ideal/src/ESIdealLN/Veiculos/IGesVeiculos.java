@@ -9,37 +9,37 @@ public interface IGesVeiculos {
      * @param matricula
      * @param tipo
      */
-    public void adicionarVeiculo(String nif, String matricula, String tipo);
+    public void adicionarVeiculo(String nif, String matricula, String tipo) throws Exception;
 
     /**
      *
      * @param matricula
      */
-    public boolean verificarRegistoVeiculo(String matricula);
+    public boolean verificarRegistoVeiculo(String matricula) throws Exception;
 
     /**
      *
      * @param nif
      * @param matricula
      */
-    public boolean validarDonoVeiculo(String nif, String matricula);
+    public boolean validarDonoVeiculo(String nif, String matricula) throws Exception;
 
     /**
      *
      * @param matricula
      */
-    public Veiculo getVeiculo(String matricula);
+    public Veiculo getVeiculo(String matricula) throws Exception;
 
     /**
      *
      * @param matricula
      * @param tipoServico
      */
-    public boolean validarCompatibilidadeVeiculo(String matricula, String tipoServico);
+    public boolean validarCompatibilidadeVeiculo(String matricula, String tipoServico) throws Exception;
 
     /**
      *
      * @param matricula
      */
-    public List<String> obterTipoServicosCompativeis(String matricula);
+    public List<String> obterTipoServicosCompativeis(String matricula) throws Exception;
 }

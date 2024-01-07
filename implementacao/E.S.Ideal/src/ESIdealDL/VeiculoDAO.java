@@ -3,8 +3,20 @@ package ESIdealDL;
 import ESIdealLN.Veiculos.*;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VeiculoDAO {
+	private Veiculo createVeiculo(String tipo, String matricula, String nifCliente) throws Exception {
+		return switch (tipo) {
+			case "gasolina" -> new VeiculoGasolina(matricula, nifCliente);
+			case "gasoleo" -> new VeiculoGasoleo(matricula, nifCliente);
+			case "hibridogla" -> new VeiculoHibridoGasolina(matricula, nifCliente);
+			case "hibridoglo" -> new VeiculoHibridoGasoleo(matricula, nifCliente);
+			case "eletrico" -> new VeiculoEletrico(matricula, nifCliente);
+			default -> throw new Exception("Tipo de veículo desconhecido.");
+		};
+	}
 
 	/**
 	 * 
@@ -77,14 +89,23 @@ public class VeiculoDAO {
 			if (!rs.next()) {
 				throw new Exception("Veículo não encontrado.");
 			}
-			return switch (rs.getString("tipo")) {
-				case "gasolina" -> new VeiculoGasolina(matricula, rs.getString("nifCliente"));
-				case "gasoleo" -> new VeiculoGasoleo(matricula, rs.getString("nifCliente"));
-				case "hibridogla" -> new VeiculoHibridoGasolina(matricula, rs.getString("nifCliente"));
-				case "hibridoglo" -> new VeiculoHibridoGasoleo(matricula, rs.getString("nifCliente"));
-				case "eletrico" -> new VeiculoEletrico(matricula, rs.getString("nifCliente"));
-				default -> throw new Exception("Tipo de veículo desconhecido.");
-			};
+			return createVeiculo(rs.getString("tipo"), matricula, rs.getString("nifCliente"));
+		}
+	}
+
+	public List<Veiculo> getVeiculos() throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Veiculo")) {
+			ResultSet rs = stm.executeQuery();
+			List<Veiculo> veiculos = new ArrayList<>();
+			while (rs.next()) {
+				veiculos.add(createVeiculo(rs.getString("tipo"), rs.getString("matricula"), rs.getString("nifCliente")));
+			}
+			if (veiculos.isEmpty()) {
+				throw new Exception("Não existem veículos.");
+			}
+			return veiculos;
+		} catch (SQLException e) {
+			throw new Exception("Erro ao obter veículos: " + e.getMessage());
 		}
 	}
 }

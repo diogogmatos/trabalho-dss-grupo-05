@@ -12,4 +12,12 @@ public class RegistoServico {
 		this.inicio = inicio;
 		this.fim = fim;
 	}
+
+	public String toString() {
+		return """
+				Marcação Número: %d
+					- Inicio: %s
+					- Fim: %s
+				""".formatted(nrMarcacao, inicio, fim);
+	}
 }

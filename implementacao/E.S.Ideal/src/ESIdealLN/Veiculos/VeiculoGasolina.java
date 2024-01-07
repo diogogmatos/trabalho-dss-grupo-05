@@ -1,5 +1,7 @@
 package ESIdealLN.Veiculos;
 
+import java.util.List;
+
 public class VeiculoGasolina extends Veiculo {
 	public VeiculoGasolina(String matricula, String nifCliente) {
 		super(matricula, nifCliente);
@@ -13,10 +15,8 @@ public class VeiculoGasolina extends Veiculo {
 	 * 
 	 * @param tipoServico
 	 */
-	public boolean validarCompatibilidade(String tipoServico) {
-		return switch (tipoServico) {
-			case "universal", "combustao", "gasolina" -> true;
-			default -> false;
-		};
+
+	public List<String> obterTipoServicosCompativeis() {
+		return List.of("universal", "combustao", "gasolina");
 	}
 }

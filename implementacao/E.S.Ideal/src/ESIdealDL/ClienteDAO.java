@@ -2,6 +2,8 @@ package ESIdealDL;
 import ESIdealLN.Clientes.Cliente;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDAO {
 	/**
@@ -83,6 +85,22 @@ public class ClienteDAO {
 			return rs.next();
 		} catch (SQLException e) {
 			throw new Exception("Erro ao verificar se existe cliente: " + e.getMessage());
+		}
+	}
+
+	public List<Cliente> getClientes() throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Cliente")) {
+			ResultSet rs = stm.executeQuery();
+			List<Cliente> clientes = new ArrayList<>();
+			while (rs.next()) {
+				clientes.add(new Cliente(rs.getString("nome"), rs.getString("nif"), rs.getString("morada"), rs.getString("telefone"), rs.getString("email"), rs.getBoolean("notSMS"), rs.getBoolean("notEmail")));
+			}
+			if (clientes.isEmpty()) {
+				throw new Exception("Não existem clientes.");
+			}
+			return clientes;
+		} catch (SQLException e) {
+			throw new Exception("Erro ao obter clientes: " + e.getMessage());
 		}
 	}
 }

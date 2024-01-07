@@ -13,4 +13,10 @@ public abstract class PostoTrabalho {
 
 	public abstract String getTipo();
 
+	public String toString() {
+		return """
+				Posto de trabalho %d
+					Tipo: %s
+				""".formatted(nrPosto, getTipo());
+	}
 }

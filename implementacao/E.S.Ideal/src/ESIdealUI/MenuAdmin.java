@@ -30,10 +30,86 @@ public class MenuAdmin implements Runnable {
 
     public void consultar() {
         Menu consultar = new Menu("Consultar");
-        consultar.addOption("Postos de Trabalho", null);
-        consultar.addOption("Serviços", null);
-        consultar.addOption("Funcionários", null);
-        consultar.addOption("Turnos", null);
+        consultar.addOption("Clientes", () -> {
+            try {
+                System.out.println(ln.consultarClientes());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Veículos", () -> {
+            try {
+                System.out.println(ln.consultarVeiculos());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Postos de Trabalho", () -> {
+            try {
+                System.out.println(ln.consultarPostosTrabalho());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Serviços Pendentes", () -> {
+            try {
+                System.out.println(ln.consultarServicosPendentes());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Serviços Concluídos", () -> {
+            try {
+                System.out.println(ln.consultarServicosConcluidos());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Serviços Incompletos", () -> {
+            try {
+                System.out.println(ln.consultarServicosIncompletos());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Serviços Disponíveis", () -> {
+            try {
+                System.out.println(ln.consultarServicosDisponiveis());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Funcionários", () -> {
+            try {
+                System.out.println(ln.consultarFuncionarios());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Turnos", () -> {
+            try {
+                System.out.println(ln.consultarTurnos());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        consultar.addOption("Registo de Serviços Efetuados", () -> {
+            try {
+                System.out.println(ln.consultarRegistoServicos());
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
         consultar.display();
     }
 
@@ -42,12 +118,13 @@ public class MenuAdmin implements Runnable {
         definirHorarioFuncionamento.addOption("Definir Abertura", () -> {
             String aberturaStr = new InputMenu<>("Digite a hora de abertura", String.class).display();
             try {
-            LocalTime abertura = LocalTime.parse(aberturaStr);
-            ln.definirAbertura(abertura);
+                LocalTime abertura = LocalTime.parse(aberturaStr);
+                ln.definirAbertura(abertura);
             }
-            catch (DateTimeParseException e) {
+            catch (Exception e) {
                 System.out.println("Hora inválida.");
             }
+            System.out.println("Horário de abertura definido com sucesso.");
         });
         definirHorarioFuncionamento.addOption("Definir Fecho", () -> {
             String fechoStr = new InputMenu<>("Digite a hora de fecho", String.class).display();
@@ -55,9 +132,10 @@ public class MenuAdmin implements Runnable {
                 LocalTime fecho = LocalTime.parse(fechoStr);
                 ln.definirFecho(fecho);
             }
-            catch (DateTimeParseException e) {
+            catch (Exception e) {
                 System.out.println("Hora inválida.");
             }
+            System.out.println("Horário de fecho definido com sucesso.");
         });
         definirHorarioFuncionamento.display();
     }
@@ -72,13 +150,24 @@ public class MenuAdmin implements Runnable {
     }
 
     public void alterarPalavraPasse() {
-        autenticarAdmin();
+        try {
+            autenticarAdmin();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         String novaPwdMestra = new InputMenu<>("Digite a nova palavra-passe mestra", String.class).display();
-        ln.alterarPalavraPasseAdmin(novaPwdMestra);
-        System.out.println("Palavra-passe mestra alterada com sucesso.");
+        try {
+            ln.alterarPalavraPasseAdmin(novaPwdMestra);
+            System.out.println("Palavra-passe mestra alterada com sucesso.");
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void autenticarAdmin() {
+    private void autenticarAdmin() throws Exception {;
         boolean autenticado = false;
         while (!autenticado) {
             String pwdMestra = new InputMenu<>("Digite a palavra-passe mestra", String.class).display();
@@ -91,7 +180,13 @@ public class MenuAdmin implements Runnable {
     }
 
     public void run() {
-        autenticarAdmin();
+        try {
+            autenticarAdmin();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         Menu admin = new Menu("Administrador");
         admin.addOption("Configurar Sistema", this::configurarSistema);

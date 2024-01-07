@@ -59,6 +59,7 @@ public class RegistoTurnoDAO {
 		try (PreparedStatement stm = Conexao.conexao.prepareStatement("UPDATE RegistoTurno SET fim = ? WHERE nrTurno = ?")) {
 			stm.setTimestamp(1, Timestamp.valueOf(fim));
 			stm.setInt(2, nrTurno);
+			stm.executeUpdate();
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao terminar turno: " + e.getMessage());
@@ -80,6 +81,23 @@ public class RegistoTurnoDAO {
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao obter turno: " + e.getMessage());
+		}
+	}
+
+	public List<RegistoTurno> getTurnos() throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM RegistoTurno")) {
+			ResultSet rs = stm.executeQuery();
+			List<RegistoTurno> turnos = new ArrayList<>();
+			while (rs.next()) {
+				turnos.add(new RegistoTurno(rs.getInt("nrTurno"), rs.getTimestamp("inicio").toLocalDateTime(), rs.getTimestamp("fim").toLocalDateTime(), rs.getInt("nrCartaoFuncionario")));
+			}
+			if (turnos.isEmpty()) {
+				throw new Exception("Não existem turnos.");
+			}
+			return turnos;
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter turnos: " + e.getMessage());
 		}
 	}
 }

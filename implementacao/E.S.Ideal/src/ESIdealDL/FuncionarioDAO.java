@@ -57,7 +57,7 @@ public class FuncionarioDAO {
 	 * @param nrCartao
 	 */
 	public Funcionario getFuncionario(int nrCartao) throws Exception {
-		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Competencias WHERE nrCartao = ?")) {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Competencia WHERE nrCartao = ?")) {
 			stm.setInt(1, nrCartao);
 			ResultSet rs = stm.executeQuery();
 			List<String> competencias = new ArrayList<>();
@@ -89,6 +89,26 @@ public class FuncionarioDAO {
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao adicionar competência: " + e.getMessage());
+		}
+	}
+
+	public List<Integer> funcionariosComCompetencia(String competencia) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Competencia WHERE tipo = ?")) {
+			stm.setString(1, competencia);
+			ResultSet rs = stm.executeQuery();
+			List<Integer> funcionarios = new ArrayList<>();
+
+			while (rs.next()) {
+				funcionarios.add(rs.getInt("nrCartao"));
+			}
+
+			if (funcionarios.isEmpty())
+				throw new Exception("Não existem funcionários com a competência " + competencia + ".");
+
+			return funcionarios;
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter funcionários com competência: " + e.getMessage());
 		}
 	}
 

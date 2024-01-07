@@ -20,7 +20,7 @@ public class InputMenu<T> {
                 String input = scanner.nextLine();
                 return parseInput(input);
             } catch (Exception e) {
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("Input inválido. Tente novamente.");
             }
         }
     }

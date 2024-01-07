@@ -10,57 +10,67 @@ public interface IGesFuncionarios {
      *
      * @param competencias
      */
-    public void registarFuncionario(List<String> competencias);
+    public void registarFuncionario(List<String> competencias) throws Exception;
 
     /**
      *
      * @param nrCartao
      */
-    public boolean removerFuncionario(int nrCartao);
+    public void removerFuncionario(int nrCartao) throws Exception;
 
     /**
      *
      * @param nrCartao
-     * @param nrPosto
      */
-    public boolean autenticarFuncionario(int nrCartao, int nrPosto);
+    public boolean validaFuncionario(int nrCartao) throws Exception;
 
     /**
      *
      * @param competencias
      */
-    public void adicionarCompetencias(List<String> competencias);
+    public void adicionarCompetencias(int nrCartao, List<String> competencias) throws Exception;
 
     /**
      *
      * @param competencias
      */
-    public void removerCompetencias(List<String> competencias);
+    public void removerCompetencias(int nrCartao, List<String> competencias) throws Exception;
 
     /**
      *
      * @param nrCartao
      */
-    public int iniciarTurno(int nrCartao);
+    public List<String> getCompetencias(int nrCartao) throws Exception;
+
+    /**
+     *
+     * @param nrCartao
+     */
+    public int iniciarTurno(int nrCartao) throws Exception;
 
     /**
      *
      * @param nrCartao
      * @param nrTurno
      */
-    public void terminarTurno(int nrCartao, int nrTurno);
+    public void terminarTurno(int nrTurno) throws Exception;
 
     /**
      *
-     * @param nrCartao
-     * @param nrMarcacao
+     * @param competencia
      */
-    public int iniciarServico(int nrCartao, int nrMarcacao);
+    public List<Integer> getFuncionariosComCompetencia(String competencia) throws Exception;
 
     /**
      *
-     * @param nrCartao
+     * @param nrTurno
      * @param nrMarcacao
      */
-    public void terminarServico(int nrCartao, int nrMarcacao);
+    public void iniciarServico(int nrTurno, int nrMarcacao) throws Exception;
+
+    /**
+     *
+     * @param nrMarcacao
+     */
+    public void terminarServico(int nrMarcacao) throws Exception;
 }

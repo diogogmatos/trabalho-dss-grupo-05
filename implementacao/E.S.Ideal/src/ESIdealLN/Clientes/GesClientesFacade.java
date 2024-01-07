@@ -2,9 +2,11 @@ package ESIdealLN.Clientes;
 
 import ESIdealDL.ClienteDAO;
 
+import java.util.List;
+
 public class GesClientesFacade implements IGesClientes {
 
-	private ClienteDAO clientes;
+	private final ClienteDAO clientes;
 
 	public GesClientesFacade() {
 		this.clientes = new ClienteDAO();
@@ -18,27 +20,28 @@ public class GesClientesFacade implements IGesClientes {
 	 * @param telefone
 	 * @param email
 	 */
-	private boolean validaDados(String nome, String nif, String morada, String telefone, String email) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.validaDados
-		throw new UnsupportedOperationException();
-	}
+	private boolean validaDados(String nome, String nif, String morada, String telefone, String email) throws Exception {
+		boolean valid = true;
 
-	/**
-	 * 
-	 * @param nif
-	 */
-	private void enviarSms(String nif) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.enviarSms
-		throw new UnsupportedOperationException();
-	}
+		if (nif.length() == 9 && telefone.length() == 12 && email.contains("@") && email.contains(".") && !clientes.existeCliente(nif)) {
+			String validChars = "1234567890";
+			for (int i = 0; i < nif.length(); i++) {
+				if (!validChars.contains(nif.substring(i, i + 1))) {
+					valid = false;
+					break;
+				}
+			}
+			for (int i = 0; i < telefone.length(); i++) {
+				if (!validChars.contains(telefone.substring(i, i + 1))) {
+					valid = false;
+					break;
+				}
+			}
+		}
+		else
+			valid = false;
 
-	/**
-	 * 
-	 * @param nif
-	 */
-	private void enviarEmail(String nif) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.enviarEmail
-		throw new UnsupportedOperationException();
+		return valid;
 	}
 
 	/**
@@ -49,28 +52,16 @@ public class GesClientesFacade implements IGesClientes {
 	 * @param telefone
 	 * @param email
 	 */
-	public void registarCliente(String nome, String nif, String morada, String telefone, String email) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.registarCliente
-		throw new UnsupportedOperationException();
+	public void registarCliente(String nome, String nif, String morada, String telefone, String email) throws Exception {
+		clientes.adicionarCliente(nome, nif, morada, telefone, email);
 	}
 
 	/**
 	 * 
 	 * @param nif
 	 */
-	public boolean verificarRegistoCliente(String nif) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.verificarRegistoCliente
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param nif
-	 * @param mensagem
-	 */
-	public boolean notificarCliente(String nif, String mensagem) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.notificarCliente
-		throw new UnsupportedOperationException();
+	public boolean verificarRegistoCliente(String nif) throws Exception {
+		return clientes.existeCliente(nif);
 	}
 
 	/**
@@ -79,9 +70,11 @@ public class GesClientesFacade implements IGesClientes {
 	 * @param sms
 	 * @param email
 	 */
-	public void registarPreferenciaNotificacao(String nif, boolean sms, boolean email) {
-		// TODO - implement ESIdealLN.Clientes.GesClientesFacade.registarPreferenciaNotificacao
-		throw new UnsupportedOperationException();
+	public void registarPreferenciaNotificacao(String nif, boolean sms, boolean email) throws Exception {
+		clientes.registarPreferenciaNotificacao(nif, sms, email);
 	}
 
+	public List<Cliente> getClientes() throws Exception {
+		return clientes.getClientes();
+	}
 }

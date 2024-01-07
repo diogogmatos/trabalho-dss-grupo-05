@@ -1,5 +1,7 @@
 package ESIdealLN.Veiculos;
 
+import java.util.List;
+
 public class VeiculoEletrico extends Veiculo {
 	public VeiculoEletrico(String matricula, String nifCliente) {
 		super(matricula, nifCliente);
@@ -13,10 +15,8 @@ public class VeiculoEletrico extends Veiculo {
 	 * 
 	 * @param tipoServico
 	 */
-	public boolean validarCompatibilidade(String tipoServico) {
-		return switch (tipoServico) {
-			case "universal", "eletrico" -> true;
-            default -> false;
-		};
+
+	public List<String> obterTipoServicosCompativeis() {
+		return List.of("universal", "eletrico");
 	}
 }

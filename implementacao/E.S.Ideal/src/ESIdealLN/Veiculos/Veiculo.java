@@ -1,5 +1,7 @@
 package ESIdealLN.Veiculos;
 
+import java.util.List;
+
 public abstract class Veiculo {
 
 	private String matricula;
@@ -24,6 +26,18 @@ public abstract class Veiculo {
 	 * 
 	 * @param tipoServico
 	 */
-	public abstract boolean validarCompatibilidade(String tipoServico);
+	public boolean validarCompatibilidade(String tipoServico) {
+		return obterTipoServicosCompativeis().contains(tipoServico);
+	}
 
+	public abstract List<String> obterTipoServicosCompativeis();
+
+	public String toString() {
+		return """
+				Veículo %s
+					NIF Cliente: %s
+					Tipo de Motor: %s
+					Serviços compatíveis: %s
+				""".formatted(matricula, nifCliente, getTipoMotor(), obterTipoServicosCompativeis());
+	}
 }

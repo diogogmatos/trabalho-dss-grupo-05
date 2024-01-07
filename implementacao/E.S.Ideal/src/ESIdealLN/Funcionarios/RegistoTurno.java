@@ -31,4 +31,13 @@ public class RegistoTurno {
 	public LocalDateTime getFim() {
 		return this.fim;
 	}
+
+	public String toString() {
+		return """
+				Turno Número: %d
+					- Inicio: %s
+					- Fim: %s
+					- Funcionario: %d
+				""".formatted(nrTurno, inicio, fim, funcionario);
+	}
 }

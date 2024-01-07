@@ -8,26 +8,26 @@ public interface IGesEstacao {
      * @param tipoPosto
      * @return
      */
-    public boolean verificaTipo(int nrPosto, String tipoPosto);
+    public boolean verificaTipo(int nrPosto, String tipoPosto) throws Exception;
 
     /**
      * @param tipoPosto
      */
-    public void adicionarPostoTrabalho(String tipoPosto);
+    public void adicionarPostoTrabalho(String tipoPosto) throws Exception;
 
-    public boolean validaPostoTrabalho(int nrPosto);
+    public boolean validaPostoTrabalho(int nrPosto) throws Exception;
 
-    public LocalTime getAbertura();
+    public LocalTime getAbertura() throws Exception;
 
-    public LocalTime getFecho();
+    public LocalTime getFecho() throws Exception;
 
     /**
      * @param abertura
      */
-    void definirAbertura(LocalTime abertura);
+    void definirAbertura(LocalTime abertura) throws Exception;
 
     /**
      * @param fecho
      */
-    void definirFecho(LocalTime fecho);
+    void definirFecho(LocalTime fecho) throws Exception;
 }

@@ -9,20 +9,13 @@ public interface IGesClientes {
      * @param telefone
      * @param email
      */
-    public void registarCliente(String nome, String nif, String morada, String telefone, String email);
+    public void registarCliente(String nome, String nif, String morada, String telefone, String email) throws Exception;
 
     /**
      *
      * @param nif
      */
-    public boolean verificarRegistoCliente(String nif);
-
-    /**
-     *
-     * @param nif
-     * @param mensagem
-     */
-    public boolean notificarCliente(String nif, String mensagem);
+    public boolean verificarRegistoCliente(String nif) throws Exception;
 
     /**
      *
@@ -30,5 +23,5 @@ public interface IGesClientes {
      * @param sms
      * @param email
      */
-    public void registarPreferenciaNotificacao(String nif, boolean sms, boolean email);
+    public void registarPreferenciaNotificacao(String nif, boolean sms, boolean email) throws Exception;
 }

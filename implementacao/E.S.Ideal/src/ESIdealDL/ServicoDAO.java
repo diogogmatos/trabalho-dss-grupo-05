@@ -3,8 +3,21 @@ package ESIdealDL;
 import ESIdealLN.Servicos.*;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServicoDAO {
+
+	private Servico createServico(String tipoServico, int idServico, String designacao, int tempoNecessario) throws Exception {
+		return switch (tipoServico) {
+			case "universal" -> new ServicoUniversal(idServico, designacao, tempoNecessario);
+			case "eletrico" -> new ServicoEletrico(idServico, designacao, tempoNecessario);
+			case "combustao" -> new ServicoCombustao(idServico, designacao, tempoNecessario);
+			case "gasolina" -> new ServicoGasolina(idServico, designacao, tempoNecessario);
+			case "gasoleo" -> new ServicoGasoleo(idServico, designacao, tempoNecessario);
+			default -> throw new Exception("Tipo de serviço inválido!");
+		};
+	}
 
 	/**
 	 * 
@@ -54,14 +67,26 @@ public class ServicoDAO {
 				throw new Exception("Serviço não encontrado.");
 			}
 
-			return switch (rs.getString("tipo")) {
-				case "combustao" -> new ServicoCombustao(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "eletrico" -> new ServicoEletrico(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "hibrido" -> new ServicoHibrido(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "gasolina" -> new ServicoGasolina(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "gasoleo" -> new ServicoGasoleo(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				default -> new ServicoUniversal(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-			};
+			return createServico(rs.getString("tipo"), rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter serviço: " + e.getMessage());
+		}
+	}
+
+	public List<Servico> getServicosPorTipo(String tipoServico) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Servico WHERE tipo = ?")) {
+			stm.setString(1, tipoServico);
+			ResultSet rs = stm.executeQuery();
+
+			List<Servico> servicos = new ArrayList<>();
+			while (rs.next()) {
+				servicos.add(createServico(rs.getString("tipo"), rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario")));
+			}
+			if (servicos.isEmpty()) {
+				throw new Exception("Não existem serviços de tipo " + tipoServico + ".");
+			}
+			return servicos;
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao obter serviço: " + e.getMessage());
@@ -81,14 +106,25 @@ public class ServicoDAO {
 				throw new Exception("Serviço não encontrado.");
 			}
 
-			return switch (rs.getString("tipo")) {
-				case "combustao" -> new ServicoCombustao(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "eletrico" -> new ServicoEletrico(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "hibrido" -> new ServicoHibrido(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "gasolina" -> new ServicoGasolina(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				case "gasoleo" -> new ServicoGasoleo(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-				default -> new ServicoUniversal(rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
-			};
+			return createServico(rs.getString("tipo"), rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario"));
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter serviço: " + e.getMessage());
+		}
+	}
+
+	public List<Servico> getServicos() throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM Servico")) {
+			ResultSet rs = stm.executeQuery();
+
+			List<Servico> servicos = new ArrayList<>();
+			while (rs.next()) {
+				servicos.add(createServico(rs.getString("tipo"), rs.getInt("idServico"), rs.getString("designacao"), rs.getInt("tempoNecessario")));
+			}
+			if (servicos.isEmpty()) {
+				throw new Exception("Não existem serviços.");
+			}
+			return servicos;
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao obter serviço: " + e.getMessage());

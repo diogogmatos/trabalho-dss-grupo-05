@@ -20,6 +20,7 @@ public class RegistoServicoDAO {
 			stm.setInt(1, nrTurno);
 			stm.setInt(2, nrMarcacao);
 			stm.setTimestamp(3, Timestamp.valueOf(inicio));
+			stm.executeUpdate();
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao iniciar serviço: " + e.getMessage());
@@ -35,6 +36,7 @@ public class RegistoServicoDAO {
 		try (PreparedStatement stm = Conexao.conexao.prepareStatement("UPDATE RegistoServico SET fim = ? WHERE nrMarcacao = ?")) {
 			stm.setTimestamp(1, Timestamp.valueOf(fim));
 			stm.setInt(2, nrMarcacao);
+			stm.executeUpdate();
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao terminar serviço: " + e.getMessage());
@@ -82,6 +84,23 @@ public class RegistoServicoDAO {
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao obter serviço: " + e.getMessage());
+		}
+	}
+
+	public List<RegistoServico> getServicos() throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM RegistoServico")) {
+			ResultSet rs = stm.executeQuery();
+			List<RegistoServico> servicos = new ArrayList<>();
+			while (rs.next()) {
+				servicos.add(new RegistoServico(rs.getInt("nrMarcacao"), rs.getTimestamp("inicio").toLocalDateTime(), rs.getTimestamp("fim").toLocalDateTime()));
+			}
+			if (servicos.isEmpty()) {
+				throw new Exception("Não existem serviços.");
+			}
+			return servicos;
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter serviços: " + e.getMessage());
 		}
 	}
 }

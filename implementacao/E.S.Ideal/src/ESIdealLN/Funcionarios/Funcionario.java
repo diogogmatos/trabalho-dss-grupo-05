@@ -47,4 +47,10 @@ public class Funcionario {
 		throw new UnsupportedOperationException();
 	}
 
+	public String toString() {
+		return """
+				Funcionário %d
+					Competências: %s
+				""".formatted(nrCartao, competencias);
+	}
 }

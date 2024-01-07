@@ -1,19 +1,19 @@
 package ESIdealLN.Estacao;
 
+import ESIdealDL.EstacaoDAO;
 import ESIdealDL.PostoTrabalhoDAO;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public class GesEstacaoFacade implements IGesEstacao {
 
-	private PostoTrabalhoDAO postosTrabalho;
-	private LocalTime abertura;
-	private LocalTime fecho;
+	private final PostoTrabalhoDAO postosTrabalho;
+	private final EstacaoDAO estacao;
 
 	public GesEstacaoFacade() {
 		this.postosTrabalho = new PostoTrabalhoDAO();
-		this.abertura = LocalTime.of(8, 0);
-		this.fecho = LocalTime.of(20, 0);
+		this.estacao = new EstacaoDAO();
 	}
 
 	/**
@@ -21,47 +21,43 @@ public class GesEstacaoFacade implements IGesEstacao {
 	 * @param nrPosto
 	 * @param tipoPosto
 	 */
-	public boolean verificaTipo(int nrPosto, String tipoPosto) {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.verificaTipo
-		throw new UnsupportedOperationException();
+	public boolean verificaTipo(int nrPosto, String tipoPosto) throws Exception {
+		return postosTrabalho.getPostoTrabalho(nrPosto).getTipo().equals(tipoPosto);
 	}
 
 	/**
 	 * 
 	 * @param tipoPosto
 	 */
-	public void adicionarPostoTrabalho(String tipoPosto) {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.adicionarPostoTrabalho
-		throw new UnsupportedOperationException();
+	public void adicionarPostoTrabalho(String tipoPosto) throws Exception {
+		postosTrabalho.adicionarPostoTrabalho(tipoPosto);
+	}
+
+	public List<PostoTrabalho> getPostosTrabalho() throws Exception {
+		return postosTrabalho.getPostosTrabalho();
 	}
 
 	/**
 	 *
 	 * @param nrPosto
 	 */
-	public boolean validaPostoTrabalho(int nrPosto) {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.validaPostoTrabalho
-		throw new UnsupportedOperationException();
+	public boolean validaPostoTrabalho(int nrPosto) throws Exception {
+		return postosTrabalho.existePostoTrabalho(nrPosto);
 	}
 
-	public LocalTime getAbertura() {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.getAbertura
-		throw new UnsupportedOperationException();
+	public LocalTime getAbertura() throws Exception {
+		return estacao.getAbertura();
 	}
 
-	public LocalTime getFecho() {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.getFecho
-		throw new UnsupportedOperationException();
+	public LocalTime getFecho() throws Exception {
+		return estacao.getFecho();
 	}
 
-	public void definirAbertura(LocalTime abertura) {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.definirAbertura
-		throw new UnsupportedOperationException();
+	public void definirAbertura(LocalTime abertura) throws Exception {
+		estacao.definirAbertura(abertura);
 	}
 
-	public void definirFecho(LocalTime fecho) {
-		// TODO - implement ESIdealLN.Estacao.GesEstacaoFacade.definirFecho
-		throw new UnsupportedOperationException();
+	public void definirFecho(LocalTime fecho) throws Exception {
+		estacao.definirFecho(fecho);
 	}
-
 }

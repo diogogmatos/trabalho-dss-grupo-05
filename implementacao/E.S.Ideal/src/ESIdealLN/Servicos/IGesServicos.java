@@ -8,74 +8,75 @@ public interface IGesServicos {
      *
      * @param tipoServico
      */
-    public List<Servico> obterServicosDeTipo(String tipoServico);
+    public List<Servico> obterServicosDeTipo(String tipoServico) throws Exception;
 
     /**
      *
      * @param nrCartao
      */
-    public boolean temServicosAtribuidos(int nrCartao);
+    public boolean temServicosAtribuidos(int nrCartao) throws Exception;
 
     /**
      *
      * @param nrCartao
      */
-    public ServicoAgendado getServicoPendente(int nrCartao);
+    public ServicoAgendado getServicoPendente(int nrCartao) throws Exception;
 
     /**
      *
      * @param designacao
      * @param tipo
      */
-    public boolean adicionarServicoDisponivel(String designacao, String tipo);
+    public int adicionarServicoDisponivel(String designacao, int tempoNecessario, String tipo) throws Exception;
 
     /**
      *
      * @param designacao
      */
-    public boolean removerServicoDisponivel(String designacao);
+    public void removerServicoDisponivel(String designacao) throws Exception;
 
     /**
      *
      * @param idServico
      */
-    public Servico getServicoDisponivel(int idServico);
-
-    /**
-     *
-     * @param matricula
-     * @param designacaoServicos
-     */
-    public List<Integer> agendarServicos(String matricula, List<String> designacaoServicos) throws Exception;
+    public Servico getServicoDisponivel(int idServico) throws Exception;
 
     /**
      *
      * @param matricula
      */
-    public boolean veiculoTemServicosPendentes(String matricula);
+    public boolean veiculoTemServicosPendentes(String matricula) throws Exception;
 
     /**
      *
      * @param matricula
      */
-    public boolean veiculoTemServicosConcluidos(String matricula);
+    public boolean veiculoTemServicosConcluidos(String matricula) throws Exception;
+
+    /**
+     *
+     * @param funcionarioOtimo
+     * @param servico
+     * @param fecho
+     */
+    public boolean analisarDisponibilidade(int funcionarioOtimo, Servico servico, LocalTime fecho) throws Exception;
 
     /**
      *
      * @param nrMarcacao
      */
-    public void concluirServico(int nrMarcacao);
+    public void concluirServico(int nrMarcacao) throws Exception;
 
     /**
      *
      * @param nrMarcacao
      * @param motivo
      */
-    public void marcarComoIncompleto(int nrMarcacao, String motivo);
+    public void marcarComoIncompleto(int nrMarcacao, String motivo) throws Exception;
 
     /**
      *
-     * @param servicos
+     * @param nrsMarcacao
      */
-    public LocalTime calcularHoraConclusao(List<Integer> servicos);
+    public LocalTime calcularHoraConclusao(List<Integer> nrsMarcacao) throws Exception;
 }

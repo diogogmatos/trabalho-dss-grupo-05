@@ -3,14 +3,27 @@ package ESIdealDL;
 import ESIdealLN.Estacao.PostoTrabalho;
 import ESIdealLN.Estacao.PostoUniversal;
 import ESIdealLN.Estacao.PostoEletrico;
-import ESIdealLN.Estacao.PostoHibrido;
 import ESIdealLN.Estacao.PostoCombustao;
 import ESIdealLN.Estacao.PostoGasolina;
 import ESIdealLN.Estacao.PostoGasoleo;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostoTrabalhoDAO {
+
+	private PostoTrabalho createPostoTrabalho(String tipo, int nrPosto) throws Exception {
+		return switch (tipo) {
+			case "universal" -> new PostoUniversal(nrPosto);
+			case "eletrico" -> new PostoEletrico(nrPosto);
+			case "combustao" -> new PostoCombustao(nrPosto);
+			case "gasolina" -> new PostoGasolina(nrPosto);
+			case "gasoleo" -> new PostoGasoleo(nrPosto);
+			default -> throw new Exception("Tipo de posto de trabalho inválido!");
+		};
+	}
+
 	/**
 	 * 
 	 * @param tipoPosto
@@ -56,18 +69,42 @@ public class PostoTrabalhoDAO {
 				throw new Exception("Posto de trabalho não encontrado.");
 			}
 
-            return switch (rs.getString("tipo")) {
-                case "universal" -> new PostoUniversal(nrPosto);
-                case "eletrico" -> new PostoEletrico(nrPosto);
-                case "hibrido" -> new PostoHibrido(nrPosto);
-                case "combustao" -> new PostoCombustao(nrPosto);
-                case "gasolina" -> new PostoGasolina(nrPosto);
-                case "gasoleo" -> new PostoGasoleo(nrPosto);
-                default -> throw new Exception("Tipo de posto de trabalho inválido!");
-            };
+            return createPostoTrabalho(rs.getString("tipo"), nrPosto);
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao obter posto de trabalho: " + e.getMessage());
+		}
+	}
+
+	/**
+	 *
+	 * @param nrPosto
+	 */
+	public boolean existePostoTrabalho(int nrPosto) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM PostoTrabalho WHERE nrPosto = ?")) {
+			stm.setInt(1, nrPosto);
+			ResultSet rs = stm.executeQuery();
+			return rs.next();
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao verificar existência de posto de trabalho: " + e.getMessage());
+		}
+	}
+
+	public List<PostoTrabalho> getPostosTrabalho() throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM PostoTrabalho")) {
+			ResultSet rs = stm.executeQuery();
+			List<PostoTrabalho> postosTrabalho = new ArrayList<>();
+			while (rs.next()) {
+				postosTrabalho.add(createPostoTrabalho(rs.getString("tipo"), rs.getInt("nrPosto")));
+			}
+			if (postosTrabalho.isEmpty()) {
+				throw new Exception("Não existem postos de trabalho.");
+			}
+			return postosTrabalho;
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter postos de trabalho: " + e.getMessage());
 		}
 	}
 }

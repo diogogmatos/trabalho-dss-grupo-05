@@ -6,17 +6,17 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class Menu {
-    private Map<Integer, String> optionNames;
-    private Map<Integer, Runnable> optionHandlers;
-    private String title;
-    private boolean exitOption;
+    private final Map<Integer, String> optionNames;
+    private final Map<Integer, Runnable> optionHandlers;
+    private final String title;
+    private final boolean exitOption;
 
     public Menu(String title) {
         this.title = title;
         this.optionNames = new HashMap<>();
         this.optionHandlers = new HashMap<>();
         this.exitOption = true;
-        addExitOption();
+        addExitOption("Sair", () -> {});
     }
 
     public Menu(String title, boolean exitOption) {
@@ -25,16 +25,14 @@ public class Menu {
         this.optionHandlers = new HashMap<>();
         this.exitOption = exitOption;
         if (exitOption) {
-            addExitOption();
+            addExitOption("Sair", () -> {});
         }
     }
 
-    private void addExitOption() {
-        int exitOptionNumber = 0;
-        optionNames.put(exitOptionNumber, "Sair");
-        optionHandlers.put(exitOptionNumber, () -> {
-            ;
-        });
+    public void addExitOption(String option, Runnable handler) {
+        int optionNumber = optionNames.size();
+        optionNames.put(optionNumber, option);
+        optionHandlers.put(optionNumber, handler);
     }
 
     public void addOption(String option, Runnable handler) {
@@ -42,20 +40,23 @@ public class Menu {
         optionNames.put(optionNumber, option);
         optionHandlers.put(optionNumber, () -> {
             handler.run();
-            display(); // Redisplay the menu after the handler completes
+            display();
         });
     }
 
     public void display() {
-        System.out.println("\n=== " + title + " ===");
+        String boxTitle = "=== " + title + " ===";
+        System.out.println("\n" + boxTitle);
         for (Map.Entry<Integer, String> entry : optionNames.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue());
         }
-        System.out.println("=====================");
+        for (int i = 0; i < boxTitle.length(); i++) {
+            System.out.print("=");
+        }
+        System.out.println();
 
         int choice = getUserChoice();
 
-        // Perform action based on user choice
         handleChoice(choice);
     }
 
@@ -69,7 +70,7 @@ public class Menu {
                 choice = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println("Input inválido. Por favor digite um número inteiro.");
-                scanner.nextLine(); // Clear the buffer
+                scanner.nextLine();
             }
 
         } while (choice < 0 || choice >= optionNames.size());
@@ -78,7 +79,12 @@ public class Menu {
     }
 
     private void handleChoice(int choice) {
-        // Perform action based on the selected option
-        optionHandlers.get(choice).run();
+        try {
+            optionHandlers.get(choice).run();
+        }
+        catch (NullPointerException e) {
+            System.out.println("Opção não implementada.");
+            display();
+        }
     }
 }

@@ -31,6 +31,16 @@ public class ServicoAgendadoDAO {
 		}
 	}
 
+	public void removerServicoPendente(int nrMarcacao) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("DELETE FROM ServicoAgendado WHERE nrMarcacao = ?")) {
+			stm.setInt(1, nrMarcacao);
+			stm.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao remover serviço agendado: " + e.getMessage());
+		}
+	}
+
 	/**
 	 * 
 	 * @param nrMarcacao
@@ -68,6 +78,24 @@ public class ServicoAgendadoDAO {
 		}
 	}
 
+	public List<ServicoAgendado> getServicosPendentesFuncionario(int nrCartaoFuncionario) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM ServicoAgendado WHERE nrCartaoFuncionario = ? AND tipo = 'pendente'")) {
+			stm.setInt(1, nrCartaoFuncionario);
+			ResultSet rs = stm.executeQuery();
+			List<ServicoAgendado> servicos = new ArrayList<>();
+			while (rs.next()) {
+				servicos.add(new ServicoAgendado(rs.getInt("idServico"), rs.getInt("nrMarcacao"), rs.getString("matricula"), rs.getInt("nrCartaoFuncionario")));
+			}
+			if (servicos.isEmpty()) {
+				throw new Exception("Não existem serviços pendentes para o funcionário " + nrCartaoFuncionario + ".");
+			}
+			return servicos;
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter serviços pendentes: " + e.getMessage());
+		}
+	}
+
 	/**
 	 * 
 	 * @param nrCartaoFuncionario
@@ -83,6 +111,47 @@ public class ServicoAgendadoDAO {
 		}
 		catch (SQLException e) {
 			throw new Exception("Erro ao obter serviço pendente: " + e.getMessage());
+		}
+	}
+
+	/**
+	 *
+	 * @param nrCartaoFuncionario
+	 */
+	public boolean existemServicosPendentesParaFuncionario(int nrCartaoFuncionario) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM ServicoAgendado WHERE nrCartaoFuncionario = ? AND tipo = 'pendente'")) {
+			stm.setInt(1, nrCartaoFuncionario);
+			ResultSet rs = stm.executeQuery();
+			return rs.next();
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao verificar se existem serviços pendentes para o funcionário " + nrCartaoFuncionario + ": " + e.getMessage());
+		}
+	}
+
+	public int tempoNecessarioAcabarServicosFuncionario(int nrCartaoFuncionario) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement(("SELECT SUM(tempoNecessario) FROM ServicoAgendado INNER JOIN Servico ON ServicoAgendado.idServico = Servico.idServico WHERE nrCartaoFuncionario = ? AND ServicoAgendado.tipo = 'pendente'"))) {
+			stm.setInt(1, nrCartaoFuncionario);
+			ResultSet rs = stm.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter o tempo necessário para acabar os serviços pendentes do funcionário " + nrCartaoFuncionario + ": " + e.getMessage());
+		}
+	}
+
+	public ServicoAgendado getServicoAgendado(int nrMarcacao) throws Exception {
+		try (PreparedStatement stm = Conexao.conexao.prepareStatement("SELECT * FROM ServicoAgendado WHERE nrMarcacao = ?")) {
+			stm.setInt(1, nrMarcacao);
+			ResultSet rs = stm.executeQuery();
+			if (!rs.next()) {
+				throw new Exception("Não existe serviço agendado com o número de marcação " + nrMarcacao + ".");
+			}
+			return new ServicoAgendado(rs.getInt("idServico"), rs.getInt("nrMarcacao"), rs.getString("matricula"), rs.getInt("nrCartaoFuncionario"));
+		}
+		catch (SQLException e) {
+			throw new Exception("Erro ao obter serviço agendado: " + e.getMessage());
 		}
 	}
 

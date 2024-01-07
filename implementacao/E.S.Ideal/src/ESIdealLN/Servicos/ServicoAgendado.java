@@ -27,8 +27,7 @@ public class ServicoAgendado {
 	}
 
 	public int getFuncionario() {
-		// TODO - implement ESIdealLN.Servicos.ServicoAgendado.getFuncionario
-		throw new UnsupportedOperationException();
+		return this.funcionarioAtribuido;
 	}
 
 	@Override

@@ -48,4 +48,15 @@ public class Cliente {
 		return this.notEmail;
 	}
 
+	public String toString() {
+		return """
+				NIF: %s
+					Nome: %s
+					Morada: %s
+					Telefone: %s
+					Email: %s
+					Notificações por SMS: %s
+					Notificações por email: %s
+				""".formatted(nif, nome, morada, telefone, email, notSMS ? "Sim" : "Não", notEmail ? "Sim" : "Não");
+	}
 }
