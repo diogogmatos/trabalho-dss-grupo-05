@@ -1,6 +1,7 @@
 package ESIdealLN.Estacao;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public interface IGesEstacao {
     /**
@@ -14,6 +15,8 @@ public interface IGesEstacao {
      * @param tipoPosto
      */
     public void adicionarPostoTrabalho(String tipoPosto) throws Exception;
+
+    public List<PostoTrabalho> getPostosTrabalho() throws Exception;
 
     public boolean validaPostoTrabalho(int nrPosto) throws Exception;
 

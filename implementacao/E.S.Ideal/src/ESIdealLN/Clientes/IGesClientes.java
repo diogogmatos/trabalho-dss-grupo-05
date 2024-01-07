@@ -1,5 +1,7 @@
 package ESIdealLN.Clientes;
 
+import java.util.List;
+
 public interface IGesClientes {
     /**
      *
@@ -24,4 +26,6 @@ public interface IGesClientes {
      * @param email
      */
     public void registarPreferenciaNotificacao(String nif, boolean sms, boolean email) throws Exception;
+
+    public List<Cliente> getClientes() throws Exception;
 }

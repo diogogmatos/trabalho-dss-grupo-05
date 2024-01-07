@@ -53,7 +53,11 @@ public class GesClientesFacade implements IGesClientes {
 	 * @param email
 	 */
 	public void registarCliente(String nome, String nif, String morada, String telefone, String email) throws Exception {
-		clientes.adicionarCliente(nome, nif, morada, telefone, email);
+		boolean valid = validaDados(nome, nif, morada, telefone, email);
+		if (valid)
+			clientes.adicionarCliente(nome, nif, morada, telefone, email);
+		else
+			throw new Exception("Dados inválidos!");
 	}
 
 	/**

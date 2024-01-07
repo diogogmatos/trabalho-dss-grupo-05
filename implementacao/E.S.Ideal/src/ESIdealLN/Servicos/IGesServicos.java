@@ -10,6 +10,10 @@ public interface IGesServicos {
      */
     public List<Servico> obterServicosDeTipo(String tipoServico) throws Exception;
 
+    public int adicionarServicoPendente(int idServico, String matricula, int funcionarioOtimo) throws Exception;
+
+    public void removerServicoPendente(int nrMarcacao) throws Exception;
+
     /**
      *
      * @param nrCartao
@@ -54,7 +58,7 @@ public interface IGesServicos {
     public boolean veiculoTemServicosConcluidos(String matricula) throws Exception;
 
     /**
-     *
+     * Verifica se a hora de conlcusão do dado serviço pelo dado funcionário não ultrapassa a hora de fecho
      * @param funcionarioOtimo
      * @param servico
      * @param fecho
@@ -79,4 +83,24 @@ public interface IGesServicos {
      * @param nrsMarcacao
      */
     public LocalTime calcularHoraConclusao(List<Integer> nrsMarcacao) throws Exception;
+
+    /**
+     * Calcula funcionario cujos serviços pendentes demorem menos tempo a concluir
+     * @param funcionariosCompativeis
+     */
+    public int calcularFuncionarioOtimo(List<Integer> funcionariosCompativeis) throws Exception;
+
+    /**
+     *
+     * @param designacaoServicos
+     */
+    public List<Servico> designacaoParaServicos(List<String> designacaoServicos) throws Exception;
+
+    public List<ServicoAgendado> getServicosPendentes() throws Exception;
+
+    public List<ServicoAgendado> getServicosConcluidos() throws Exception;
+
+    public List<Servico> getServicosDisponiveis() throws Exception;
+
+    public List<ServicoAgendadoIncompleto> getServicosIncompletos() throws Exception;
 }

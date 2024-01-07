@@ -42,4 +42,6 @@ public interface IGesVeiculos {
      * @param matricula
      */
     public List<String> obterTipoServicosCompativeis(String matricula) throws Exception;
+
+    public List<Veiculo> getVeiculos() throws Exception;
 }

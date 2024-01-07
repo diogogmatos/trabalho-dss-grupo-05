@@ -73,4 +73,10 @@ public interface IGesFuncionarios {
      * @param nrMarcacao
      */
     public void terminarServico(int nrMarcacao) throws Exception;
+
+    public List<Funcionario> getFuncionarios() throws Exception;
+
+    public List<RegistoTurno> getTurnos() throws Exception;
+
+    public List<RegistoServico> getRegistoServicos() throws Exception;
 }
