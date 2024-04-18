@@ -1,13 +1,25 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/i6Gjtc5R)
+# E. S. Ideal
 
-**Members:**
+> Backend management system for a service station, made with Java
 
-a100741 - Diogo Gomes Matos
+This project was developed as a part of the Desenvolvimento de Sistemas de Software (DSS) subject, during the first semester of the final year of the Software Engineering Bachelors degree at University of Minho.
 
-a097352 - Flávio Alexandre Marques da Silva
+The objective was to plan the project structure by gathering requirements and detailing all aspects with the help of UML diagrams and other notations, to then go into implementation using Java and MariaDB.
 
-a100824 - Gonçalo Daniel Machado Costa
+The project follows the MVC (Model View Controller) pattern, containing a Data Layer, Business Logic Layer and a User Interface Layer.
 
-a100610 - José Afonso Lopes Correia
+## Results
 
-a100743 - Marta Raquel da Silva Rodrigues
+> 🏅 [**19/20**](/assets/Pauta%20DSS%202024%20-%20Exame.pdf)
+
+## Team
+
+a100741 - **Diogo Gomes Matos**
+
+a097352 - **Flávio Alexandre Marques da Silva**
+
+a100824 - **Gonçalo Daniel Machado Costa**
+
+a100610 - **José Afonso Lopes Correia**
+
+a100743 - **Marta Raquel da Silva Rodrigues**
